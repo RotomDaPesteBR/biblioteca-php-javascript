@@ -3,7 +3,7 @@
 $servidor   =   "localhost";
 $bd         =   "biblioteca";
 $usuario    =   "root";
-$senha      =   "root";
+$senha      =   "123456";
 
 $conexao    =   mysqli_connect($servidor, $usuario, $senha)
     or die("Erro ao conectar no banco de dados");

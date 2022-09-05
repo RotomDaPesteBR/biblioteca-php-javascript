@@ -8,18 +8,18 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link text-white" aria-current="page" href="../index.php">Home</a>
+                <a class="nav-link text-white" aria-current="page" href="./index.php">Home</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Cadastros
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="./usuarios.php">Usuários</a></li>
-                  <li><a class="dropdown-item" href="./autores.php">Autores</a></li>
-                  <li><a class="dropdown-item" href="./editoras.php">Editoras</a></li>
+                <li><a class="dropdown-item" href="./views/usuarios.php">Usuários</a></li>
+                  <li><a class="dropdown-item" href="./views/autores.php">Autores</a></li>
+                  <li><a class="dropdown-item" href="./views/editoras.php">Editoras</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="./livros.php">Livros</a></li>
+                  <li><a class="dropdown-item" href="./views/livros.php">Livros</a></li>
                 </ul>
               </li>
               <li class="nav-item">
