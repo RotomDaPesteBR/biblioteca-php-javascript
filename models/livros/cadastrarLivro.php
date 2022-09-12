@@ -17,7 +17,7 @@ $sql = "INSERT INTO livros"
     . " VALUES ";
 
 foreach ($id_autores as $id_autor) {
-    $sql = $sql . "(@idlivro, '{$id_autor}'),";
+    $sql = $sql . "(@idlivro, '{$id_autor["0"]}'),";
 }
 
 $sql = substr_replace($sql ,"", -1) . ";";
