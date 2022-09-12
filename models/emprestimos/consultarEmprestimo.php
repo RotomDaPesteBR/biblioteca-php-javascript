@@ -4,9 +4,9 @@ include("../conexao.php");
 
 header('Content-Type: application/json');
 
-$livroId = $_GET['livroId'];
+$userId = $_GET['userId'];
 
-$sql = "SELECT * from livros where id = $livroId";
+$sql = "SELECT * from livros where id = $userId";
 
 $fetch = mysqli_query($conexao, $sql);
 

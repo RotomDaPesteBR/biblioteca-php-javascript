@@ -19,7 +19,7 @@ include("footer.php");
     <div class="card">
         <div class="card-body">
 
-            <table class="table table-striped table-hover" id="listaLivros">
+            <table class="table table-hover" id="listaLivros">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -29,6 +29,7 @@ include("footer.php");
                         <th scope="col">Páginas</th>
                         <th scope="col">ISBN</th>
                         <th scope="col">Editora</th>
+                        <th scope="col">Autores</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
@@ -47,7 +48,7 @@ include("footer.php");
                         <form>
                             <div class="modal-body">
 
-                                <input type="hidden" id="userId" name="userId">
+                                <input type="hidden" id="livroId" name="livroId">
 
                                 <div class="mb-3">
                                     <label for="titulo" class="form-label">Titulo</label>
@@ -83,6 +84,14 @@ include("footer.php");
                                     </div>
                                 </div>
 
+                                <div class="mb-3">
+                                    <label for="autores" class="form-label">Autores</label>
+                                    <div class="input-group">
+                                        <select class="form-control editoras" id="autores" name="autores" multiple>
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -90,6 +99,40 @@ include("footer.php");
                             </div>
 
                         </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalAutores" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Autores</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-hover" id="listaAutores">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nome:</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td scope="row">Machado</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Machado</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Machado</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,7 +146,7 @@ include("footer.php");
                         </div>
                         <div class="modal-body">
 
-                            <input type="hidden" id="deleteUserId" name="deleteUserId">
+                            <input type="hidden" id="deleteLivroId" name="deleteLivroId">
 
                             <p>Tem certeza que deseja excluir este livro?</p>
                         </div>

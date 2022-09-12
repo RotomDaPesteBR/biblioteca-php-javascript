@@ -1,0 +1,11 @@
+.dropdown{
+    appearance: auto;
+}
+
+.vencido{
+    background-color: rgb(255, 150, 150);
+}
+
+.btnvencido{
+    background-color: #ffffff;
+}

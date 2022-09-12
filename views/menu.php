@@ -23,7 +23,7 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" aria-current="page" href="#" >Empréstimos</a>
+                <a class="nav-link text-white" aria-current="page" href="./emprestimos.php" >Empréstimos</a>
               </li>
             </ul>
            

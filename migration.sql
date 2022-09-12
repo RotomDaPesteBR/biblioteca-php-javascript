@@ -25,11 +25,11 @@ CREATE TABLE `autores` (
   `nome` varchar(45) DEFAULT NULL,
   `data_nascimento` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `autores` */
 
-insert  into `autores`(`id`,`nome`,`data_nascimento`) values (1,'Machado de Assis','21/06/1939'),(2,'Monteiro Lobato','18/04/1882');
+insert  into `autores`(`id`,`nome`,`data_nascimento`) values (1,'Machado de Assis','21/06/1939'),(2,'Monteiro Lobato','18/04/1882'),(3,'Tappei Nagatsuki','11/05/1987');
 
 /*Table structure for table `editoras` */
 
@@ -57,9 +57,11 @@ CREATE TABLE `emprestimos` (
   `data_retirada` varchar(45) DEFAULT NULL,
   `data_devolucao` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `emprestimos` */
+
+insert  into `emprestimos`(`id`,`id_usuario`,`id_livro`,`data_retirada`,`data_devolucao`) values (1,3,2,'03/09/2022','05/09/2022'),(2,1,1,'20/08/2022',NULL),(3,2,2,'05/09/2022',NULL);
 
 /*Table structure for table `livros` */
 
@@ -74,11 +76,11 @@ CREATE TABLE `livros` (
   `isbn` varchar(100) DEFAULT NULL,
   `id_editora` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 
 /*Data for the table `livros` */
 
-insert  into `livros`(`id`,`titulo`,`subtitulo`,`volume`,`qtd_paginas`,`isbn`,`id_editora`) values (1,'Re:Zero','Começando uma Vida em Outro Mundo',16,496,'978-6586799118',2),(2,'Re:Zero','Começando uma Vida em Outro Mundo',17,472,'978-6586799125',2);
+insert  into `livros`(`id`,`titulo`,`subtitulo`,`volume`,`qtd_paginas`,`isbn`,`id_editora`) values (1,'Re:Zero','Começando uma Vida em Outro Mundo',16,496,'978-6586799118',2),(2,'Re:Zero','Começando uma Vida em Outro Mundo',17,472,'978-6586799125',2),(3,'Re:Zero','Começando uma Vida em Outro Mundo',18,472,'978-6586799132',2),(4,'ABC','DCE',1,150,'123-4567891011',1);
 
 /*Table structure for table `livros_autores` */
 
@@ -89,9 +91,11 @@ CREATE TABLE `livros_autores` (
   `id_livro` int DEFAULT NULL,
   `id_autor` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
 /*Data for the table `livros_autores` */
+
+insert  into `livros_autores`(`id`,`id_livro`,`id_autor`) values (1,1,3),(2,2,3),(3,3,3),(4,4,2);
 
 /*Table structure for table `usuarios` */
 

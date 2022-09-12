@@ -6,12 +6,19 @@ function saveUser() {
     paginas: document.getElementById("paginas").value,
     isbn: document.getElementById("isbn").value,
     id_editora: document.getElementById("editoras").value,
+    id_autores: [],
   };
 
-  var userId = document.getElementById("userId").value;
+  data.id_autores.push($("#autores :selected").map(
+    function(i, el) {
+      return $(el).val();
+    }).get()
+  );
 
-  if (userId) {
-    data.userId = userId;
+  var livroId = document.getElementById("livroId").value;
+
+  if (livroId) {
+    data.livroId = livroId;
 
     fetch("../models/livros/editarLivro.php", {
       method: "POST",
@@ -28,7 +35,7 @@ function saveUser() {
             document.getElementById("modalSuccess")
           );
           modalSuccess.show();
-          document.getElementById("userId").value = "";
+          document.getElementById("livroId").value = "";
           getLivros();
         }
       })
@@ -64,29 +71,30 @@ function getLivros() {
         $("#listaLivros>tbody").html("");
 
         data.forEach((element) => {
-          $("#listaLivros>tbody").append("<tr>");
+          let row = "<tr>" + "<td>" + element.id + "</td>" +
+          "<td>" + element.titulo + "</td>" +
+          "<td>" + element.subtitulo + "</td>" +
+          "<td>" + element.volume + "</td>" +
+          "<td>" + element.qtd_paginas + "</td>" +
+          "<td>" + element.isbn + "</td>" +
+          "<td>" + element.nome + "</td>" +
+          "<td><div class='btn-group' role='group'>" +
+          "<a type='button' class='btn btn-outline-primary' onclick='consultarAutores(" + element.id + ")'>Autores</a>" +
+          "</div></td>" + 
+          "<td><div class='btn-group' role='group'>" +
+          "<a type='button' class='btn btn-outline-primary' onclick='consultar(" +
+          element.id +
+          ")'>Consultar</a>" +
+          "<a type='button' class='btn btn-outline-primary' onclick='editar(" +
+          element.id +
+          ")'>Editar</a>" +
+          "<a type='button' class='btn btn-outline-danger' onclick='excluir(" +
+          element.id +
+          ")'>Excluir</a>" +
+          "</div></td>" +
+          "</tr>";
 
-          $("#listaLivros>tbody").append("<td>" + element.id + "</td>");
-          $("#listaLivros>tbody").append("<td>" + element.titulo + "</td>");
-          $("#listaLivros>tbody").append("<td>" + element.subtitulo + "</td>");
-          $("#listaLivros>tbody").append("<td>" + element.volume + "</td>");
-          $("#listaLivros>tbody").append("<td>" + element.qtd_paginas + "</td>");
-          $("#listaLivros>tbody").append("<td>" + element.isbn + "</td>");
-          $("#listaLivros>tbody").append("<td>" + element.nome + "</td>");
-          $("#listaLivros>tbody").append(
-            "<td><div class='btn-group' role='group'>" +
-              "<a type='button' class='btn btn-outline-primary' onclick='consultar(" +
-              element.id +
-              ")'>Consultar</a>" +
-              "<a type='button' class='btn btn-outline-primary' onclick='editar(" +
-              element.id +
-              ")'>Editar</a>" +
-              "<a type='button' class='btn btn-outline-danger' onclick='excluir(" +
-              element.id +
-              ")'>Excluir</a>" +
-              "</div></td>"
-          );
-          $("#listaLivros>tbody").append("</tr>");
+          $("#listaLivros>tbody").append(row);
         });
       });
     })
@@ -95,15 +103,15 @@ function getLivros() {
     });
 }
 
-function consultar(userId) {
-  fetch(`../models/livros/consultarLivro.php?userId=${userId}`)
+function consultar(livroId) {
+  fetch(`../models/livros/consultarLivro.php?livroId=${livroId}`)
     .then(function (response) {
       response.json().then(function (data) {
         var modalElement = document.getElementById("modalLivros");
         var modalLivros = bootstrap.Modal.getInstance(modalElement);
         modalLivros.show();
 
-        document.getElementById("userId").value = data[0];
+        document.getElementById("livroId").value = data[0];
         document.getElementById("titulo").value = data[1];
         document.getElementById("subtitulo").value = data[2];
         document.getElementById("volume").value = data[3];
@@ -111,7 +119,7 @@ function consultar(userId) {
         document.getElementById("isbn").value = data[5];
         document.getElementById("editoras").value = data[6];
 
-        document.getElementById("userId").setAttribute("disabled", true);
+        document.getElementById("livroId").setAttribute("disabled", true);
         document.getElementById("titulo").setAttribute("disabled", true);
         document.getElementById("subtitulo").setAttribute("disabled", true);
         document.getElementById("volume").setAttribute("disabled", true);
@@ -128,15 +136,15 @@ function consultar(userId) {
     });
 }
 
-function editar(userId) {
-  fetch(`../models/livros/consultarLivro.php?userId=${userId}`)
+function editar(livroId) {
+  fetch(`../models/livros/consultarLivro.php?livroId=${livroId}`)
     .then(function (response) {
       response.json().then(function (data) {
         var modalElement = document.getElementById("modalLivros");
         var modalLivros = bootstrap.Modal.getInstance(modalElement);
         modalLivros.show();
 
-        document.getElementById("userId").value = data[0];
+        document.getElementById("livroId").value = data[0];
         document.getElementById("titulo").value = data[1];
         document.getElementById("subtitulo").value = data[2];
         document.getElementById("volume").value = data[3];
@@ -144,7 +152,7 @@ function editar(userId) {
         document.getElementById("isbn").value = data[5];
         document.getElementById("editoras").value = data[6];
 
-        document.getElementById("userId").disabled = false;
+        document.getElementById("livroId").disabled = false;
         document.getElementById("titulo").disabled = false;
         document.getElementById("subtitulo").disabled = false;
         document.getElementById("volume").disabled = false;
@@ -161,18 +169,18 @@ function editar(userId) {
     });
 }
 
-function excluir(userId) {
+function excluir(livroId) {
   var modalElementDelete = document.getElementById("modalExcluirLivro");
   var modalExcluirLivro = bootstrap.Modal.getInstance(modalElementDelete);
   modalExcluirLivro.show();
 
-  document.getElementById("deleteUserId").value = userId;
+  document.getElementById("deleteLivroId").value = livroId;
 }
 
 function realDeleteLivro() {
-  var deleteUserId = document.getElementById("deleteUserId").value;
+  var deleteLivroId = document.getElementById("deleteLivroId").value;
 
-  fetch(`../models/livros/excluirLivro.php?userId=${deleteUserId}`, {
+  fetch(`../models/livros/excluirLivro.php?livroId=${deleteLivroId}`, {
     method: "DELETE",
   })
     .then(function (response) {
@@ -209,18 +217,58 @@ function populateEditoras() {
     });
 }
 
+function populateAutores() {
+  fetch("../models/livros/populateAutores.php")
+    .then(function (response) {
+      response.json().then(function (data) {
+        $("#autores>tbody").html("");
+        data.forEach((element) => {
+          option = document.createElement("option");
+          option.value = element.id;
+          option.label = element.nome;
+          autores = document.getElementById("autores");
+          autores.append(option);
+        });
+      });
+    })
+    .catch(function (err) {
+      console.error("Erro", err);
+    });
+}
+
+function consultarAutores(livroId){
+  var modalElementAutores = document.getElementById("modalAutores");
+  var modalAutores = bootstrap.Modal.getInstance(modalElementAutores);
+  
+  fetch(`../models/livros/consultarAutores.php?livroId=${livroId}`)
+    .then(function (response) {
+      response.json().then(function (data) {
+        $("#listaAutores>tbody").html("");
+        data.forEach((element) => {
+          $("#listaAutores>tbody").append("<tr><td>" + element.nome + "</td></tr>");
+          modalAutores.show();
+        });
+      });
+    })
+    .catch(function (err) {
+      console.error("Erro", err);
+    });
+}
+
 window.onload = () => {
   // inicializa o modal escondido na tela
   $("#modalLivros").modal("hide");
+  $("#modalAutores").modal("hide");
   $("#modalExcluirLivro").modal("hide");
   populateEditoras();
+  populateAutores();
   getLivros();
   clearModal()
 };
 
 function clearModal () {
   $('#modalLivros').on('show.bs.modal', function (e) {
-    document.getElementById("userId").value = "";
+    document.getElementById("livroId").value = "";
     document.getElementById("titulo").value = "";
     document.getElementById("subtitulo").value = "";
     document.getElementById("volume").value = "";
@@ -228,7 +276,7 @@ function clearModal () {
     document.getElementById("isbn").value = "";
     document.getElementById("editoras").value = "";
 
-    document.getElementById("userId").disabled = false;
+    document.getElementById("livroId").disabled = false;
     document.getElementById("titulo").disabled = false;
     document.getElementById("subtitulo").disabled = false;
     document.getElementById("volume").disabled = false;
@@ -240,8 +288,3 @@ function clearModal () {
     document.getElementById("modalTitle").textContent = "Adicionar Livro";
   })
 }
-
-
-//<option value="1" label="Panini"></option>
-
-//"<option value='" + element.id + "' label='" + element.nome + "'>"+ "</option>"

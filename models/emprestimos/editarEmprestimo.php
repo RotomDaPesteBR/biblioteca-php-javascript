@@ -14,7 +14,7 @@ $sql = "UPDATE livros SET"
     . " qtd_paginas = '{$decoded["paginas"]}', "
     . " isbn = '{$decoded["isbn"]}', "
     . " id_editora = '{$decoded["id_editora"]}' "
-    . " WHERE id = '{$decoded["livroId"]}'";
+    . " WHERE id = '{$decoded["userId"]}'";
 
 $row = mysqli_query($conexao, $sql);
 

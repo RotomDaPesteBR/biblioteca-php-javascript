@@ -24,6 +24,7 @@ As tabelas usadas estão no arquivo migrate.sql
 ## Autores
 
 - [@felipepiorini](https://github.com/felipepiorini)
+- [@RotomDaPesteBR](https://github.com/RotomDaPesteBR)
 
 
 ## Licença

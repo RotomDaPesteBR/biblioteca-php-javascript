@@ -2,9 +2,9 @@
 
 include("../conexao.php");
 
-$livroId = $_GET['livroId'];
+$userId = $_GET['userId'];
 
-$sql = "DELETE from livros WHERE id='{$livroId}' ";
+$sql = "DELETE from livros WHERE id='{$userId}' ";
 
 $row = mysqli_query($conexao, $sql);
 
